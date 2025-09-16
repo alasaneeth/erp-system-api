@@ -1,4 +1,13 @@
+
+using erp_system_api.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(option=>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 // Add services to the container.
 
@@ -22,4 +31,21 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+ApplyMigration();
+
 app.Run();
+
+void ApplyMigration()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var _db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        if (_db.Database.GetPendingMigrations().Count() > 0)
+        {
+            _db.Database.Migrate();
+        }
+    }
+}
+        
+            
