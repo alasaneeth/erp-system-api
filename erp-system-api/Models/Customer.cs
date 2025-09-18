@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace erp_system_api.Models
 {
+    [Table("customers")]
     public class Customer : AuditableEntity
     {
         [MaxLength(50)]

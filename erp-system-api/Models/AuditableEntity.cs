@@ -10,11 +10,8 @@ namespace erp_system_api.Models
 
         public int Id { get; set; }
 
-        [Required]
-        public long Code { get; set; }
-
-        public long? CreatedBy { get; set; }
-        public long? UpdatedBy { get; set; }
+        public int? CreatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public bool IsActive { get; set; } = true;
